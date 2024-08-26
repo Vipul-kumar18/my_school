@@ -16,5 +16,13 @@
       "src": "/api/(.*)",
       "dest": "/api/$1.js"
     }
-  ]
+  ],
+  "build": {
+    "env": {
+      "DATABASE_URL": "@my-database-url"
+    },
+    "commands": {
+      "build": "npx prisma generate"
+    }
+  }
 }
