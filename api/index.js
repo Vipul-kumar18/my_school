@@ -1,15 +1,11 @@
-const express = require('express');
 const { PrismaClient } = require('@prisma/client');
 
-const prisma = new PrismaClient();
-const app = express();
 
-app.use(express.json());
-
-// Add School API
-
-
-module.exports = (req, res) => {
-    res.json({ message: 'Welcome to the School Management API!' });
-  };
-  
+module.exports = async (req, res) => {
+    try {
+        res.status(200).json({ message: 'Welcome to the School Management API!' });
+    } catch (error) {
+        console.error('Error handling request:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
