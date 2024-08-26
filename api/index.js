@@ -1,9 +1,38 @@
 const express = require('express');
 const { PrismaClient } = require('@prisma/client');
+
 const prisma = new PrismaClient();
 const app = express();
 
-app.get('/', async (req, res) => {
+app.use(express.json());
+
+// Add School API
+app.post('/api/addSchool', async (req, res) => {
+  const { name, address, latitude, longitude } = req.body;
+
+  if (!name || !address || !latitude || !longitude) {
+    return res.status(400).json({ error: 'All fields are required' });
+  }
+
+  try {
+    const newSchool = await prisma.school.create({
+      data: {
+        name,
+        address,
+        latitude: parseFloat(latitude),
+        longitude: parseFloat(longitude),
+      },
+    });
+
+    res.json(newSchool);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// List Schools API
+app.get('/api/listSchools', async (req, res) => {
   const { userLat, userLng } = req.query;
 
   if (!userLat || !userLng) {
@@ -16,6 +45,7 @@ app.get('/', async (req, res) => {
 
     const schools = await prisma.school.findMany();
 
+    // Calculate distance and sort by proximity
     const sortedSchools = schools.map((school) => {
       const distance = Math.sqrt(
         Math.pow(school.latitude - userLatitude, 2) +

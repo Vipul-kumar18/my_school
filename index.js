@@ -6,7 +6,7 @@ const app = express();
 app.use(express.json());
 
 // Add School API
-app.post('/api/addSchool', async (req, res) => {
+app.post('/addSchool', async (req, res) => {
   const { name, address, latitude, longitude } = req.body;
 
   if (!name || !address || !latitude || !longitude) {
@@ -31,7 +31,7 @@ app.post('/api/addSchool', async (req, res) => {
 });
 
 // List Schools API
-app.get('/api/listSchools', async (req, res) => {
+app.get('/listSchools', async (req, res) => {
   const { userLat, userLng } = req.query;
 
   if (!userLat || !userLng) {
