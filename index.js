@@ -60,5 +60,10 @@ app.get('/api/listSchools', async (req, res) => {
   }
 });
 
-// Export the app for Vercel
+// Use the PORT environment variable
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
+
 module.exports = app;
