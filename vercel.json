@@ -1,11 +1,5 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "api/**/*.js",
-      "use": "@vercel/node"
-    }
-  ],
   "functions": {
     "api/**/*.js": {
       "runtime": "nodejs18.x"
@@ -20,9 +14,6 @@
   "build": {
     "env": {
       "DATABASE_URL": "mysql://uudhabk17jvgugzh:DEWwkEiH4wtJoSmNrriD@byc5o7vnxyldrbzas7at-mysql.services.clever-cloud.com:3306/byc5o7vnxyldrbzas7at"
-    },
-    "commands": {
-      "build": "npx prisma generate"
     }
   }
 }
