@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 const app = express();
 app.use(express.json());
 
-app.get('/',() => {
+app.get('/',(req,res) => {
   return res.json({ message: 'Welcome to the School Management API!' });
 })
 
