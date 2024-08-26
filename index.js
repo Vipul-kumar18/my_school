@@ -60,10 +60,7 @@ app.get('/api/listSchools', async (req, res) => {
   }
 });
 
-// Use the PORT environment variable
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
-});
-
-module.exports = app;
+// Export as a serverless function
+module.exports = (req, res) => {
+  return app(req, res);
+};
