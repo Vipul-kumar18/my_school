@@ -5,6 +5,10 @@ const prisma = new PrismaClient();
 const app = express();
 app.use(express.json());
 
+app.get('/',() => {
+  return res.json({ message: 'Welcome to the School Management API!' });
+})
+
 // Add School API
 app.post('/api/addSchool', async (req, res) => {
   const { name, address, latitude, longitude } = req.body;
